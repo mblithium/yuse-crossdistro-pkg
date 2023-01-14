@@ -10,10 +10,19 @@ nativePKGUpdate="enable"
 flatpakUpdate="enabled"
 snapUpdate="disabled"
 callName="yuse"
+distroID="Arch"
+
+function detectDistro() {
+    local distID=$(cat /etc/lsb-release | grep "DISTRIB_ID")
+    local distID=${distID:12:-1}
+    if ! [[ -z distID ]]; then distroID=$distID; fi
+}
 
 function commandHelp() {
     echo -e "
 \e[34mHelp about de Yuse Package Wrapper.\e[0m\n
+
+Distro: $distroID
 
 Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. Check out some of the commands below:
 
@@ -89,6 +98,7 @@ function chooseCommand() {
 }
 
 function init() {
+    if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
     chooseCommand
 }
 
