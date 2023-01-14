@@ -77,25 +77,15 @@ function chooseCommand() {
         commandHelp
     fi
 
-    if [[ $param1 == "install" ]]; then
-        commandInstall
-    fi
+    if [[ $param1 == "install" ]]; then commandInstall; fi
 
-    if [[ $param1 == "remove" ]]; then
-        commandRemove
-    fi
+    if [[ $param1 == "remove" ]]; then commandRemove; fi
 
-    if [[ $param1 == "credits" ]]; then 
-        commandCredits
-    fi
+    if [[ $param1 == "credits" ]]; then commandCredits; fi
 
-    if [[ $param1 == "update" ]]; then
-        commandUpdate
-    fi
+    if [[ $param1 == "update" ]]; then commandUpdate; fi
 
-    if [[ $param1 == "help" ]]; then
-        commandHelp
-    fi
+    if [[ $param1 == "help" ]]; then commandHelp; fi
 }
 
 function init() {
