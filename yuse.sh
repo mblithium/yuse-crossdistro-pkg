@@ -117,7 +117,7 @@ function chooseCommand() {
 
 function init() {
     if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
-    if [[ nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
+    if [[ $nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
     chooseCommand
 }
 
