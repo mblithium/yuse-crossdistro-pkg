@@ -82,7 +82,12 @@ function commandUpdate() {
 function commandInstall() {
     if ! [[ -z $param2 ]]; then
         echo "Installing package with the your package manager..."
-        sudo pacman -S $param2
+        if [[ $packageManager == "pacman" ]]; then 
+            sudo pacman -S $param2 
+        fi
+        if [[ $packageManager == "apt" ]]; then
+            sudo apt install $param2
+        fi
     fi
 }
 
