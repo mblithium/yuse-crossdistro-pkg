@@ -6,7 +6,7 @@ param2=$2
 
 # Configure your options here.
 packageManager="pacman"
-nativePKGUpdate="enable"
+nativePKGUpdate="enabled"
 flatpakUpdate="enabled"
 snapUpdate="disabled"
 callName="yuse" 
@@ -16,7 +16,19 @@ function detectDistro() {
     local distID=$(cat /etc/os-release | grep -w "NAME=")
     local distID=${distID:6:-1}
     if ! [[ -z distID ]]; then distroID=$distID; fi
-    echo $distID
+}
+
+function setNativePKGManager() {
+    IFS=$'\n\t'
+    local distroPacman=("Arch Linux" "Manjaro")
+    for distro in ${distroPacman[@]}; do
+        if [[ $distro == $distroID ]]; then packageManager="pacman"; fi
+    done
+
+    local distroAPT=("Debian" "Debian GNU/Linux" "Ubuntu" "Mint")
+    for distro in ${distroAPT[@]}; do
+        if [[ $distro == $distroID ]]; then packageManager="apt"; fi
+    done
 }
 
 function commandHelp() {
@@ -55,7 +67,7 @@ function commandUpdate() {
     fi
     if [[ $packageManager == "apt" ]]; then
         echo -e "Updating apt packages...\n"
-        sudo apt update
+        sudo apt update | sudo apt upgrade
     fi
     if [[ $flatpakUpdate == "enable" ]]; then
         echo -e "Updating flatpak packages...\n"
@@ -100,6 +112,7 @@ function chooseCommand() {
 
 function init() {
     if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
+    if [[ nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
     chooseCommand
 }
 
