@@ -37,6 +37,6 @@ There is no installer for now, you have to put it in some directory and create a
 **Example:**
 ```bash
 # ~/.zshrc
-# alias use='[pathtofile]'
+# alias yuse='[pathtofile]'
 alias yuse='~/Dev/Github/yuse-crossdistro-pkg/yuse.sh'
 ```
