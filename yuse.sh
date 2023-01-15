@@ -67,7 +67,8 @@ function commandUpdate() {
     fi
     if [[ $packageManager == "apt" ]]; then
         echo -e "Updating apt packages...\n"
-        sudo apt update | sudo apt upgrade
+        sudo apt update
+        sudo apt upgrade
     fi
     if [[ $flatpakUpdate == "enable" ]]; then
         echo -e "Updating flatpak packages...\n"
@@ -94,7 +95,12 @@ function commandInstall() {
 function commandRemove() {
     if ! [[ -z $param2 ]]; then
         echo "Removing package with the your package manager..."
-        sudo pacman -R $param2
+        if [[ $packageManager == "pacman" ]]; then 
+            sudo pacman -R $param2 
+        fi
+        if [[ $packageManager == "apt" ]]; then
+            sudo apt remove $param2
+        fi
     fi
 }
 
