@@ -9,13 +9,14 @@ packageManager="pacman"
 nativePKGUpdate="enable"
 flatpakUpdate="enabled"
 snapUpdate="disabled"
-callName="yuse"
-distroID="Arch"
+callName="yuse" 
+distroID="DetectDistro"
 
 function detectDistro() {
-    local distID=$(cat /etc/lsb-release | grep "DISTRIB_ID")
-    local distID=${distID:12:-1}
+    local distID=$(cat /etc/os-release | grep -w "NAME=")
+    local distID=${distID:6:-1}
     if ! [[ -z distID ]]; then distroID=$distID; fi
+    echo $distID
 }
 
 function commandHelp() {
@@ -103,7 +104,3 @@ function init() {
 }
 
 init
-
-
-
-
