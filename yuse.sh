@@ -29,6 +29,12 @@ function setNativePKGManager() {
     for distro in ${distroAPT[@]}; do
         if [[ $distro == $distroID ]]; then packageManager="apt"; fi
     done
+
+    local distroDNF=("Fedora")
+    for distro in ${distroDNF[@]}; do
+        if [[ $distro == $distroID ]]; then packageManager="dnf"; fi
+    done
+
 }
 
 function commandHelp() {
@@ -70,6 +76,10 @@ function commandUpdate() {
         sudo apt update
         sudo apt upgrade
     fi
+    if [[ $packageManager == "dnf" ]]; then
+        echo -e "Updating apt packages...\n"
+        sudo dnf upgrade
+    fi
     if [[ $flatpakUpdate == "enable" ]]; then
         echo -e "Updating flatpak packages...\n"
         flatpak update
@@ -89,6 +99,9 @@ function commandInstall() {
         if [[ $packageManager == "apt" ]]; then
             sudo apt install $param2
         fi
+        if [[ $packageManager == "dnf" ]]; then
+            sudo dnf install $param2
+        fi
     fi
 }
 
@@ -100,6 +113,9 @@ function commandRemove() {
         fi
         if [[ $packageManager == "apt" ]]; then
             sudo apt remove $param2
+        fi
+        if [[ $packageManager == "dnf" ]]; then
+            sudo dnf remove $param2
         fi
     fi
 }
