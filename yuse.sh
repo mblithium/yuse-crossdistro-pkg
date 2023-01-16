@@ -18,6 +18,10 @@ function detectDistro() {
     if ! [[ -z distID ]]; then distroID=$distID; fi
 }
 
+function configureYuse() {
+    echo "This function has not yet been implemented."
+}
+
 function setNativePKGManager() {
     IFS=$'\n\t'
     local distroPacman=("Arch Linux" "Manjaro")
@@ -43,12 +47,17 @@ function commandHelp() {
 
 Distro: $distroID
 
-Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. Check out some of the commands below:
+Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. 
+Its syntax is simple and focusing on being more human.
+Check out some of the commands below:
 
     \e[1;4mUpdate your packages\e[0m
     $callName update 
 
     \e[1;4mInstall a package\e[0m
+    $callName install [package]
+
+    \e[1;4mRemove a package\e[0m
     $callName install [package]
 
     \e[1;4mConfigure for yuse\e[0m
@@ -135,7 +144,11 @@ function chooseCommand() {
     if [[ $param1 == "update" ]]; then commandUpdate; fi
 
     if [[ $param1 == "help" ]]; then commandHelp; fi
+
+    if [[ $param1 == "config" ]]; then configureYuse; fi
 }
+
+
 
 function init() {
     if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
