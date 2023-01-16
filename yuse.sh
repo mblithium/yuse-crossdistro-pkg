@@ -4,13 +4,9 @@
 param1=$1
 param2=$2
 
-# Configure your options here.
-packageManager="pacman"
-nativePKGUpdate="enabled"
-flatpakUpdate="enabled"
-snapUpdate="disabled"
-callName="yuse" 
-distroID="DetectDistro"
+# Configuration file
+# Please change your settings in the "./yuse.config" file.
+source yuse.config
 
 function detectDistro() {
     local distID=$(cat /etc/os-release | grep -w "NAME=")
