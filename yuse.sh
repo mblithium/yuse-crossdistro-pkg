@@ -43,9 +43,7 @@ function commandHelp() {
 
 Distro: $distroID
 
-Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. 
-Its syntax is simple and focusing on being more human.
-Check out some of the commands below:
+Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. Its syntax is simple and focusing on being more human. Check out some of the commands below:
 
     \e[1;4mUpdate your packages\e[0m
     $callName update 
@@ -56,7 +54,7 @@ Check out some of the commands below:
     \e[1;4mRemove a package\e[0m
     $callName install [package]
 
-    \e[1;4mConfigure for yuse\e[0m
+    \e[1;4mConfigure yuse\e[0m
     $callName config
 "
 }
