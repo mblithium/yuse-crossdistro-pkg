@@ -39,7 +39,7 @@ function setNativePKGManager() {
 
 function commandHelp() {
     echo -e "
-\e[34mHelp about de Yuse Package Wrapper.\e[0m\n
+\e[34mHelp about the Yuse Package Wrapper.\e[0m\n
 
 Distro: $distroID
 
