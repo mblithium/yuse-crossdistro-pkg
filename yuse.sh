@@ -6,7 +6,7 @@ param2=$2
 
 # Configuration file
 # Please change your settings in the "./yuse.config" file.
-source yuse.config
+source "./yuse.config"
 
 function detectDistro() {
     local distID=$(cat /etc/os-release | grep -w "NAME=")
