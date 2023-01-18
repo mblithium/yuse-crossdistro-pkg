@@ -142,12 +142,26 @@ function chooseCommand() {
     if [[ $param1 == "config" ]]; then configureYuse; fi
 }
 
+function afterUpdate() {
+    if [[ $afterUpdateDo == "shutdown" ]; then
+        echo "A"
+        local userInput = "shutdown"
+        read -t 30 -p "Any key to cancel..." userInput
+        if [[ userInput != "shutdown" ]]; then
+            echo "Cancelado"
+        fi
+        else
+            echo "Desligando..."
+        fi
+    fi
+}
 
 
 function init() {
-    if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
-    if [[ $nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
-    chooseCommand
+    # if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
+    # if [[ $nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
+    # chooseCommand
+    afterUpdate
 }
 
 init
