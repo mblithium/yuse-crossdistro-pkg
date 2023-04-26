@@ -6,26 +6,30 @@ Yuse is a simple, bash centric, cross distro, wrapper for manager packages with 
 
 ## Yuse Help
 
-```
-Help about the Yuse Package Wrapper.
-
 Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. Its syntax is simple and focusing on being more human. Check out some of the commands below:
 
-    Update your packages
-    yuse update 
-
-    Install a package
-    yuse install [package]
-
-    Remove a package
-    yuse install [package]
-
-    Configure yuse
-    yuse config
- 
+### Update your packages
+```bash 
+yuse update 
 ```
 
-## Example
+### Install a package
+```bash 
+yuse install [package] 
+```
+
+### Remove a package
+```bash 
+yuse install [package]
+```
+### Configure yuse
+```bash 
+yuse config
+```
+
+## How it works
+
+You will use the yuse syntax for any supported system.
 
 ```bash
 yuse install [packagename]

@@ -1,21 +1,65 @@
 #!/usr/bin/env bash
+# Yuse - Crossdistro Package Wrapper.
 
 # 1: command; 2: arguments; 3: arguments (...)
 param1=$1
 param2=$2
 
+# ------ Meta ------
+# Version
+yuse_version="0.1"
+yuse_version_channel="alpha"
+
+# ------ Meta ------
+
+# Script call command (this only changes placeholders when mentioned in a message)
+callName="yuse" 
+
+# Which package manager will you use.
+# "pacman", "apt", "dnf", etc
+packageManager="pacman"
+
+# Enables or disables the updates of the package managers native to the system.
+# "enabled" or "disabled"
+nativePKGUpdate="enabled"
+
+# ------ Flatpak and Snap update support. ------
+
+# Enable or disable flatpak updates
+flatpakUpdate="disabled" # [enabled/disabled]
+
+# Enable or disable snap updates
+snapUpdate="disabled" # [enabled/disabled]
+
+# ------ Flatpak and Snap update support. ------
+
+# Specifies which distro you are using
+# "DetectDistro" (to auto-detect with os-release file).
+distroID="DetectDistro"
+
+# After Update 
+# AfterUpdateDo configures if you want to perform some operation after the update. For now, only "shutdown" is available.
+afterUpdateDo=""
+
 # Configuration file
 # Please change your settings in the "./yuse.config" file.
-source "./yuse.config"
+# (this changes the default settings).
+
+function loadConfig() {
+    if [[ -e "$(pwd)/yuse.config" ]]; then
+        varSourcePath="$(pwd)/yuse.config"
+        source "${varSourcePath}"
+    fi
+}
+
+# . yuse.config
+loadConfig
+
 
 function detectDistro() {
     local distID=$(cat /etc/os-release | grep -w "NAME=")
     local distID=${distID:6:-1}
     if ! [[ -z distID ]]; then distroID=$distID; fi
-}
-
-function configureYuse() {
-    echo "This function has not yet been implemented."
 }
 
 function setNativePKGManager() {
@@ -39,8 +83,9 @@ function setNativePKGManager() {
 
 function commandHelp() {
     echo -e "
-\e[34mHelp about the Yuse Package Wrapper.\e[0m\n
+\e[34mHelp about the Yuse Package Wrapper.\e[0m
 
+Version: $yuse_version ($yuse_version_channel)
 Distro: $distroID
 
 Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. Its syntax is simple and focusing on being more human. Check out some of the commands below:
@@ -61,11 +106,12 @@ Yuse is a simple, bash centric, cross distro, wrapper for manager packages with 
 
 function commandCredits() {
 echo -e "
-\e[34mCREDITS\e[0m\n
+\e[34mCREDITS\e[0m
 
-Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands.\n
+Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands.
 
 Created by: mblithium.
+Download or contribute here: https://github.com/mblithium/yuse-crossdistro-pkg
 "
 }
 
@@ -83,11 +129,11 @@ function commandUpdate() {
         echo -e "Updating apt packages...\n"
         sudo dnf upgrade
     fi
-    if [[ $flatpakUpdate == "enable" ]]; then
+    if [[ $flatpakUpdate == "enabled" ]]; then
         echo -e "Updating flatpak packages...\n"
         flatpak update
     fi
-    if [[ $snapUpdate == "enable" ]]; then 
+    if [[ $snapUpdate == "enabled" ]]; then 
         echo -e "Updating snap packages...\n"
         snap update
     fi
@@ -120,12 +166,22 @@ function commandRemove() {
         if [[ $packageManager == "dnf" ]]; then
             sudo dnf remove $param2
         fi
+        if [[ $packageManager == "flatpak" ]]; then
+            flatpak remove $param2
+        fi
     fi
+}
+
+
+function configCommand() {
+    echo "Configurations..."
+    vim "$(pwd)/yuse.config"
+    loadConfig
 }
 
 function chooseCommand() {
     if [[ -z $param1 ]]; then
-        echo -e "\e[1;4mYuse doesn't work without some argument,\nyou can try \"$callName help\" for help.\nI will do it for you...\e[0m"
+        echo -e "\e[1;31mYuse doesn't work without some argument,\nyou can try \"$callName help\" for help.\nI will do it for you...\e[0m"
         commandHelp
     fi
 
@@ -139,29 +195,24 @@ function chooseCommand() {
 
     if [[ $param1 == "help" ]]; then commandHelp; fi
 
-    if [[ $param1 == "config" ]]; then configureYuse; fi
+    if [[ $param1 == "config" ]]; then configCommand; fi
 }
 
+
 function afterUpdate() {
-    if [[ $afterUpdateDo == "shutdown" ]; then
-        echo "A"
-        local userInput = "shutdown"
-        read -t 30 -p "Any key to cancel..." userInput
-        if [[ userInput != "shutdown" ]]; then
-            echo "Cancelado"
-        fi
-        else
-            echo "Desligando..."
-        fi
-    fi
+    # Scripts that run after update
+   return 0
 }
+
 
 
 function init() {
-    # if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
-    # if [[ $nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
-    # chooseCommand
-    afterUpdate
+    if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
+    if [[ $nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
+    chooseCommand
 }
 
 init
+
+# By: mblithium
+# https://github.com/mblithium
