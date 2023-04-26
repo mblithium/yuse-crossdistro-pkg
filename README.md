@@ -2,6 +2,12 @@
 
 Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands.
 
+<div align="center">
+
+![Screenshot_20230426_204137](https://user-images.githubusercontent.com/6350505/234725636-64580d3e-c956-42b3-979b-aa94974dbec5.png)
+
+</div>
+
 **Warning:** Many things need to be manually configured at this time, if you are considering using it in its current state, be aware of this before trying.
 
 ## Yuse Help
