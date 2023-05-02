@@ -9,6 +9,7 @@ param2=$2
 # Version
 yuse_version="0.1"
 yuse_version_channel="alpha"
+yuse_location=$0
 
 # ------ Meta ------
 
@@ -41,13 +42,17 @@ distroID="DetectDistro"
 # AfterUpdateDo configures if you want to perform some operation after the update. For now, only "shutdown" is available.
 afterUpdateDo=""
 
+# Yuse config Path
+# Here is the user configurations.
+yuse_config_path="${yuse_location:0:-7}yuse.config"
+
 # Configuration file
 # Please change your settings in the "./yuse.config" file.
 # (this changes the default settings).
 
 function loadConfig() {
-    if [[ -e "$(pwd)/yuse.config" ]]; then
-        varSourcePath="$(pwd)/yuse.config"
+    if [[ -e $yuse_config_path ]]; then
+        varSourcePath=$yuse_config_path
         source "${varSourcePath}"
     fi
 }
@@ -74,11 +79,10 @@ function setNativePKGManager() {
         if [[ $distro == $distroID ]]; then packageManager="apt"; fi
     done
 
-    local distroDNF=("Fedora")
+    local distroDNF=("Fedora" "Red Hat")
     for distro in ${distroDNF[@]}; do
         if [[ $distro == $distroID ]]; then packageManager="dnf"; fi
     done
-
 }
 
 function commandHelp() {
@@ -90,14 +94,17 @@ Distro: $distroID
 
 Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. Its syntax is simple and focusing on being more human. Check out some of the commands below:
 
-    \e[1;4mUpdate your packages\e[0m
-    $callName update 
-
     \e[1;4mInstall a package\e[0m
     $callName install [package]
 
     \e[1;4mRemove a package\e[0m
     $callName install [package]
+
+    \e[1;4mUpdate your packages\e[0m
+    $callName update 
+
+    \e[1;4mClear cache from package manager\e[0m
+    $callName clear
 
     \e[1;4mConfigure yuse\e[0m
     $callName config
@@ -115,6 +122,13 @@ Download or contribute here: https://github.com/mblithium/yuse-crossdistro-pkg
 "
 }
 
+function clearPKGCache() {
+    if [[ $packageManager == pacman ]]; then
+        sudo pacman -Sc
+    fi
+
+}
+
 function commandUpdate() {
     if [[ $packageManager == "pacman" ]]; then
         echo -e "Updating pacman packages...\n"
@@ -128,6 +142,10 @@ function commandUpdate() {
     if [[ $packageManager == "dnf" ]]; then
         echo -e "Updating apt packages...\n"
         sudo dnf upgrade
+    fi
+    if [[ $packageManager == "yum" ]]; then
+        echo -e "Updating YUM packages...\n"
+        yum update
     fi
     if [[ $flatpakUpdate == "enabled" ]]; then
         echo -e "Updating flatpak packages...\n"
@@ -175,7 +193,10 @@ function commandRemove() {
 
 function configCommand() {
     echo "Configurations..."
-    vim "$(pwd)/yuse.config"
+    local yuse_config_path="${yuse_location:0:-7}yuse.config"
+    echo "Yuse config path: $yuse_config_path"
+    vim $yuse_config_path
+    # xdg-open $yuse_config_path [ test ]
     loadConfig
 }
 
@@ -188,6 +209,8 @@ function chooseCommand() {
     if [[ $param1 == "install" ]]; then commandInstall; fi
 
     if [[ $param1 == "remove" ]]; then commandRemove; fi
+
+    if [[ $param1 == "clear" ]]; then clearPKGCache; fi
 
     if [[ $param1 == "credits" ]]; then commandCredits; fi
 
