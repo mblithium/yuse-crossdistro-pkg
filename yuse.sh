@@ -172,6 +172,11 @@ function commandInstall() {
     fi
 }
 
+function pkgbundler() {
+    teste=$1
+    echo $teste;
+}
+
 function commandRemove() {
     if ! [[ -z $param2 ]]; then
         echo "Removing package with the your package manager..."
@@ -219,6 +224,10 @@ function chooseCommand() {
     if [[ $param1 == "help" ]]; then commandHelp; fi
 
     if [[ $param1 == "config" ]]; then configCommand; fi
+
+    if [[ $param1 == "test" ]]; then pkgbundler a; fi
+
+
 }
 
 
