@@ -44,7 +44,8 @@ afterUpdateDo=""
 
 # Yuse config Path
 # Here is the user configurations.
-yuse_config_path="${yuse_location:0:-7}yuse.config"
+yuse_config_path="${yuse_location:0:-7}/config/yuse.config"
+echo $yuse_config_path
 
 # Configuration file
 # Please change your settings in the "./yuse.config" file.
@@ -198,7 +199,7 @@ function commandRemove() {
 
 function configCommand() {
     echo "Configurations..."
-    local yuse_config_path="${yuse_location:0:-7}yuse.config"
+    # local yuse_config_path="${yuse_location:0:-7}yuse.config"
     echo "Yuse config path: $yuse_config_path"
     vim $yuse_config_path
     # xdg-open $yuse_config_path [ test ]
@@ -211,23 +212,32 @@ function chooseCommand() {
         commandHelp
     fi
 
-    if [[ $param1 == "install" ]]; then commandInstall; fi
-
-    if [[ $param1 == "remove" ]]; then commandRemove; fi
-
-    if [[ $param1 == "clear" ]]; then clearPKGCache; fi
-
-    if [[ $param1 == "credits" ]]; then commandCredits; fi
-
-    if [[ $param1 == "update" ]]; then commandUpdate; fi
-
-    if [[ $param1 == "help" ]]; then commandHelp; fi
-
-    if [[ $param1 == "config" ]]; then configCommand; fi
-
-    if [[ $param1 == "test" ]]; then pkgbundler a; fi
-
-
+    case $param1 in
+    "install")
+        commandInstall
+        ;;
+    "update")
+        commandUpdate
+        ;;
+    "remove")
+        commandRemove
+        ;;
+    "clear")
+        clearPKGCache
+        ;;
+    "config")
+        configCommand
+        ;;
+    "help")
+        commandHelp
+        ;;
+    "credits")
+        commandCredits
+        ;;
+    "test")
+        echo "Ok"
+        ;;
+    esac
 }
 
 
