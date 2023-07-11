@@ -243,6 +243,10 @@ function chooseCommand() {
 
 function afterUpdate() {
     # Scripts that run after update
+    if [[ $param2 == "--flatpak" ]]; then
+        $flatpakUpdate = "enabled"
+        flatpak update
+    fi
    return 0
 }
 
@@ -252,6 +256,7 @@ function init() {
     if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
     if [[ $nativePKGUpdate == "enabled" ]]; then setNativePKGManager; fi
     chooseCommand
+    afterUpdate
 }
 
 init
