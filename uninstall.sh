@@ -33,7 +33,7 @@ uninstall() {
         sudo rm /usr/bin/yuse
     fi
     if [[ -d /opt/yuse-crosspkg ]]; then
-        local files="config install.sh LICENSE README.md yuse.sh"
+        local files="install.sh LICENSE README.md yuse.sh"
         for item in $files 
         do
             sudo rm "/opt/yuse-crosspkg/$item"
