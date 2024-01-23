@@ -44,8 +44,7 @@ afterUpdateDo=""
 
 # Yuse config Path
 # Here is the user configurations.
-yuse_config_path="${yuse_location:0:-7}/config/yuse.config"
-echo $yuse_config_path
+yuse_config_path="/opt/yuse-crosspkg/config/yuse.config"
 
 # Configuration file
 # Please change your settings in the "./yuse.config" file.
@@ -53,8 +52,7 @@ echo $yuse_config_path
 
 function loadConfig() {
     if [[ -e $yuse_config_path ]]; then
-        varSourcePath=$yuse_config_path
-        source "${varSourcePath}"
+        source "${yuse_config_path}"
     fi
 }
 
@@ -201,8 +199,7 @@ function configCommand() {
     echo "Configurations..."
     # local yuse_config_path="${yuse_location:0:-7}yuse.config"
     echo "Yuse config path: $yuse_config_path"
-    vim $yuse_config_path
-    # xdg-open $yuse_config_path [ test ]
+    sudo vim $yuse_config_path
     loadConfig
 }
 
