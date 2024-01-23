@@ -11,35 +11,12 @@ yuse_version="0.1"
 yuse_version_channel="alpha"
 yuse_location=$0
 
-# ------ Meta ------
-
-# Script call command (this only changes placeholders when mentioned in a message)
 callName="yuse" 
-
-# Which package manager will you use.
-# "pacman", "apt", "dnf", etc
 packageManager="pacman"
-
-# Enables or disables the updates of the package managers native to the system.
-# "enabled" or "disabled"
 nativePKGUpdate="enabled"
-
-# ------ Flatpak and Snap update support. ------
-
-# Enable or disable flatpak updates
 flatpakUpdate="disabled" # [enabled/disabled]
-
-# Enable or disable snap updates
 snapUpdate="disabled" # [enabled/disabled]
-
-# ------ Flatpak and Snap update support. ------
-
-# Specifies which distro you are using
-# "DetectDistro" (to auto-detect with os-release file).
 distroID="DetectDistro"
-
-# After Update 
-# AfterUpdateDo configures if you want to perform some operation after the update. For now, only "shutdown" is available.
 afterUpdateDo=""
 
 # Yuse config Path
