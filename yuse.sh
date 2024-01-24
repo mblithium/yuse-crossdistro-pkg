@@ -102,27 +102,28 @@ function clearPKGCache() {
     if [[ $packageManager == pacman ]]; then
         sudo pacman -Sc
     fi
-
 }
 
 function commandUpdate() {
-    if [[ $packageManager == "pacman" ]]; then
-        echo -e "Updating pacman packages...\n"
-        sudo pacman -Syu
-    fi
-    if [[ $packageManager == "apt" ]]; then
-        echo -e "Updating apt packages...\n"
-        sudo apt update
-        sudo apt upgrade
-    fi
-    if [[ $packageManager == "dnf" ]]; then
-        echo -e "Updating apt packages...\n"
-        sudo dnf upgrade
-    fi
-    if [[ $packageManager == "yum" ]]; then
-        echo -e "Updating YUM packages...\n"
-        yum update
-    fi
+    case $packageManager in 
+        "pacman")
+            echo -e "Updating pacman packages...\n"
+            sudo pacman -Syu
+        ;;
+        "apt")
+            echo -e "Updating apt packages...\n"
+            sudo apt update
+            sudo apt upgrade
+        ;;
+        "dnf")
+            echo -e "Updating apt packages...\n"
+            sudo dnf upgrade
+        ;;
+        "yum")
+            echo -e "Updating YUM packages...\n"
+            yum update
+    esac
+  
     if [[ $flatpakUpdate == "enabled" ]]; then
         echo -e "Updating flatpak packages...\n"
         flatpak update
@@ -136,38 +137,40 @@ function commandUpdate() {
 function commandInstall() {
     if ! [[ -z $param2 ]]; then
         echo "Installing package with the your package manager..."
-        if [[ $packageManager == "pacman" ]]; then 
-            sudo pacman -S $param2 
-        fi
-        if [[ $packageManager == "apt" ]]; then
-            sudo apt install $param2
-        fi
-        if [[ $packageManager == "dnf" ]]; then
-            sudo dnf install $param2
-        fi
+        case $packageManager in 
+            "pacman") 
+                sudo pacman -S $param2 
+            ;;
+            "apt")
+                sudo apt install $param2
+            ;;
+            "dnf")
+                sudo dnf install $param2
+            ;;
+            *) 
+                echo "The script couldn't identify your package manager."
+            ;;
+        esac
     fi
-}
-
-function pkgbundler() {
-    teste=$1
-    echo $teste;
 }
 
 function commandRemove() {
     if ! [[ -z $param2 ]]; then
         echo "Removing package with the your package manager..."
-        if [[ $packageManager == "pacman" ]]; then 
-            sudo pacman -R $param2 
-        fi
-        if [[ $packageManager == "apt" ]]; then
-            sudo apt remove $param2
-        fi
-        if [[ $packageManager == "dnf" ]]; then
-            sudo dnf remove $param2
-        fi
-        if [[ $packageManager == "flatpak" ]]; then
-            flatpak remove $param2
-        fi
+        case $packageManager in
+            "pacman")
+                 sudo pacman -R $param2 
+            ;;
+            "apt")
+                sudo apt remove $param2
+            ;;
+            "dnf")
+                sudo dnf remove $param2
+            ;;
+            "flatpak")
+                flatpak remove $param2
+            ::
+        esac
     fi
 }
 
@@ -208,8 +211,8 @@ function chooseCommand() {
     "credits")
         commandCredits
         ;;
-    "test")
-        echo "Ok"
+    *)
+        printf "Invalid argument, try using \"yuse help\" to find out what options are available.\n"
         ;;
     esac
 }
