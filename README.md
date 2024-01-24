@@ -37,6 +37,9 @@ yuse config
 
 You will use the yuse syntax for any supported system.
 
+![Screenshot_20240123_214254](https://github.com/mblithium/yuse-crossdistro-pkg/assets/6350505/62047f12-fbf1-42e1-870e-60182cdc602b)
+
+
 ```bash
 yuse install [packagename]
 ```
@@ -53,11 +56,7 @@ or
 sudo pacman -S [packagename]
 ```
 
-or
-
-```bash
-flatpak install [packagename]
-```
+Or any other supported package manager.
 
 **Use "yuse help" for help.**
 
