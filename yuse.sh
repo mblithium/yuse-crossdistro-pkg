@@ -67,6 +67,7 @@ function commandHelp() {
 
 Version: $yuse_version ($yuse_version_channel)
 Distro: $distroID
+Shell: $SHELL
 
 Yuse is a simple, bash centric, cross distro, wrapper for manager packages with the same commands. Its syntax is simple and focusing on being more human. Check out some of the commands below:
 
