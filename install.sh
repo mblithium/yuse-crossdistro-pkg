@@ -19,20 +19,14 @@ areYouSure() {
     }
 
     case $userprompt in
-    "y")
-        installOpt
+        "y" | "yes" | "yep")
+            installOpt
         ;;
-    "yes")
-        installOpt
+        "n" | "no" | "nop")
+            noOpt
         ;;
-    "n")
-        noOpt
-        ;;
-    "no")
-        noOpt
-        ;;
-    *)
-        echo "I didn't understand your answer, so I'll take it as no."
+        *)
+            echo "I didn't understand your answer, so I'll take it as no."
         ;;
     esac
 }
