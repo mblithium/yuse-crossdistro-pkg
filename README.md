@@ -61,13 +61,24 @@ flatpak install [packagename]
 
 **Use "yuse help" for help.**
 
-## How to "install"
+## Installation
 
-There is no installer for now, you have to put it in some directory and create an alias for it in your ".bashrc" or ".zshrc".
+In previous versions, you had to manually add the execution path as an alias in .bashrc, but now it's easier to install because it has two scripts.
 
-**Example:**
+**Installation:**
+
+If you get an error when running the script, give it permission to run with chmod.
+
 ```bash
-# ~/.zshrc
-# alias yuse='[pathtofile]'
-alias yuse='~/Dev/Github/yuse-crossdistro-pkg/yuse.sh'
+chmod +x ./install 
+./install
 ```
+
+**Uninstall:**
+
+If you want to uninstall, it's also quite simple, as there is a script to uninstall everything that has been installed and configured on the system.
+
+```bash
+./opt/yuse-crosspkg/uninstall.sh
+```
+

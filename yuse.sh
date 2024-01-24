@@ -7,7 +7,7 @@ param2=$2
 
 # ------ Meta ------
 # Version
-yuse_version="0.1"
+yuse_version="0.2"
 yuse_version_channel="alpha"
 yuse_location=$0
 

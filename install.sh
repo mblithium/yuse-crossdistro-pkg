@@ -59,7 +59,7 @@ checkInstalation() {
 
     # fake, don't trust me
     echo "Nice, it's been installed successfully, trust me."
-    printf "use: \"yuse about\" for more information\n"
+    printf "use: \"yuse help\" for more information\n"
 }
 
 areYouSure
