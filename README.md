@@ -81,3 +81,88 @@ If you want to uninstall, it's also quite simple, as there is a script to uninst
 ./opt/yuse-crosspkg/uninstall.sh
 ```
 
+## Compatibility
+
+<table>
+    <tr>
+        <th>Package Manager</th>
+        <th>Install package</th>
+        <th>Reinstall package</th>
+        <th>Remove package</th>
+        <th>Update packages</th>
+        <th>Clear cache</th>
+    </tr>
+    <tr>
+        <td>Pacman</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>✅ Works.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+    </tr>
+    <tr>
+        <td>APT</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>✅ Works.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+    </tr>
+    <tr>
+        <td>DNF</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>✅ Works.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+    </tr>
+    <tr>
+        <td>Flatpak</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+        <td>✅ Works.</td>
+        <td>🟡 Works. It doesn't support multiple arguments.</td>
+    </tr>
+    <tr>
+        <td>Snap</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+    </tr>
+    <tr>
+        <td>Nix</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+    </tr>
+    <tr>
+        <td>YUM</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+    </tr>
+    <tr>
+        <td>RPM</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+    </tr>
+    <tr>
+        <td>Appimages (Managers)</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+        <td>❌ Not compatible.</td>
+    </tr>
+</table>
+
