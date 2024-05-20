@@ -170,7 +170,30 @@ function commandRemove() {
             ;;
             "flatpak")
                 flatpak remove $param2
-            ::
+            ;;
+        esac
+    fi
+}
+
+function commandListPKG() {
+    if ! [[ -z $param1 ]]; then
+        echo "listing installed packages..."
+        case $packageManager in
+            "pacman")
+                echo "Pacman Packages: " > packageslist.txt
+                sudo pacman -Q >> packageslist.txt 
+                echo "Your pacman packages: "
+                while read line; do echo $line; done < packageslist.txt | less
+            ;;
+            "apt")
+                echo ""
+            ;;
+            "dnf")
+                echo ""
+            ;;
+            "flatpak")
+                flatpak list | less
+            ;;
         esac
     fi
 }
@@ -178,7 +201,6 @@ function commandRemove() {
 
 function configCommand() {
     echo "Configurations..."
-    # local yuse_config_path="${yuse_location:0:-7}yuse.config"
     echo "Yuse config path: $yuse_config_path"
     sudo vim $yuse_config_path
     loadConfig
@@ -206,6 +228,9 @@ function chooseCommand() {
     "config")
         configCommand
         ;;
+    "list")
+        commandListPKG
+        ;;
     "help")
         commandHelp
         ;;
@@ -228,7 +253,9 @@ function afterUpdate() {
    return 0
 }
 
-
+function log() {
+    echo "TESTANDO $1"
+}
 
 function init() {
     if [[ $distroID == "DetectDistro" ]]; then detectDistro; fi
