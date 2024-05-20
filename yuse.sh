@@ -55,7 +55,7 @@ function setNativePKGManager() {
         if [[ $distro == $distroID ]]; then packageManager="apt"; fi
     done
 
-    local distroDNF=("Fedora" "Red Hat")
+    local distroDNF=("Fedora Linux" "Red Hat")
     for distro in ${distroDNF[@]}; do
         if [[ $distro == $distroID ]]; then packageManager="dnf"; fi
     done
